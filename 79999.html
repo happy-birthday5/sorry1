@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> nada💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Reem+Kufi:wght@500&family=Parisienne&display=swap');
+
+        :root {
+            --primary: #ff2d75;
+            --secondary: #4d002b;
+            --accent: #ffd7e5;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Reem Kufi', sans-serif;
+            background: #000;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        /* خلفية النجوم المتساقطة */
+        #canvas-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, #2b0017 0%, #000 100%);
+        }
+
+        .main-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* برواز الصورة الملكي */
+        .royal-frame {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin-bottom: 30px;
+            padding: 10px;
+            background: linear-gradient(45deg, var(--primary), transparent, var(--primary));
+            border-radius: 50%;
+            animation: rotateFrame 5s linear infinite;
+        }
+
+        @keyframes rotateFrame {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #000;
+            transform: rotate(-0deg); /* لتثبيت الصورة داخل الإطار المتحرك */
+        }
+
+        .profile-img-fix {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 250px;
+            height: 250px;
+            z-index: 2;
+        }
+
+        /* الاسم بخط لاتيني كلاسيكي */
+        .romantic-name {
+            font-family: 'Parisienne', cursive;
+            font-size: 5.5rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(255, 45, 117, 0.8), 0 0 40px rgba(255, 45, 117, 0.4);
+            margin: 20px 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--primary); }
+            to { text-shadow: 0 0 30px var(--accent), 0 0 50px var(--primary); }
+        }
+
+        /* صندوق الرسالة السحرية */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            margin: 40px 0;
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            line-height: 2;
+            color: var(--accent);
+            min-height: 100px;
+        }
+
+        /* الجاليري العائم */
+        .floating-gallery {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .card-3d {
+            width: 280px;
+            height: 380px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-3d:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card-front img, .card-front video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-back {
+            background: var(--primary);
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* زر "رحلتنا" */
+        .btn-magic {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 15px 50px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
+            margin-top: 50px;
+            font-family: 'Reem Kufi', sans-serif;
+        }
+
+        .btn-magic:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 50px var(--primary);
+        }
+
+        /* الموسيقى */
+        .music-circle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        audio {
+            width: 50px;
+            opacity: 0.3;
+            transition: 0.5s;
+        }
+        audio:hover { opacity: 1; width: 250px; }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-stars"></canvas>
+
+    <div class="main-wrapper">
+        
+        <div class="royal-frame"></div>
+        <div class="profile-img-fix">
+            <img src="11photo_2026-10-26_14-38-26.jpg" class="profile-img">
+        </div>
+
+        <h1 class="romantic-name">Nada💖</h1>
+
+        <div class="glass-card">
+            <div class="typing-text" id="typingText"></div>
+        </div>
+
+        <div class="floating-gallery">
+            <div class="card-3d">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="11112photo_2026-10-26_14-27-44.jpg">
+                    </div>
+                    <div class="card-back">
+                     الشايُ حلوٌ، لكنْ عيناكِ أبهي
+
+فكيفَ يُقارنُ الشايُ بسحرِ عينيكِ؟. 💗
+                    </div>
+                </div>
+            </div>
+
+              <div class="card-3d">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="11113photo_2026-10-26_14-28-25.jpg">
+                    </div>
+                    <div class="card-back">
+                      الليل و سماه و نجومه و قمره...♥️♥️ 
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-3d">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="photo_2026-10-26_14-36-18.jpg">
+                    </div>
+                    <div class="card-back">
+                     «منذُ التقينا وقلبي كلّه عجبٌ
+عن أيّ فعلٍ جزاني اللّٰهُ لُقياك!» 💗💗 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-magic" onclick="window.location.href='masseg.html'">
+           رايك في كل دا.. ✨
+        </button>
+
+        <div style="margin-top: 50px; font-size: 2rem;">💍🕯️💖</div>
+
+    </div>
+
+    <div class="music-circle">
+        <audio controls autoplay loop>
+            <source src="fBhi-zmn69k.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // 1. نظام النجوم المتساقطة
+        const canvas = document.getElementById('canvas-stars');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = "rgba(255, 215, 229, 0.8)";
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 150; i++) stars.push(new Star());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // 2. تأثير الكتابة
+        const text = "هديه اعتذار للاخت ندا و ان شاء الله تبسطك 💗";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typingText").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // البدء بالكتابة عند تحميل الصفحة
+        window.onload = typeWriter;
+
+    </script>
+</body>
+</html>
